@@ -35,6 +35,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -265,7 +266,7 @@ public class NameApi {
         Assert.state(!multipartFile.isEmpty(), "You can't upload an empty file");
 
         try {
-            File file = File.createTempFile(UUID.randomUUID().toString(), ".tmp");
+            File file = Files.createTempFile(UUID.randomUUID().toString(), ".tmp").toFile();
             multipartFile.transferTo(file);
 
             // perform the importation of names in a seperate thread
